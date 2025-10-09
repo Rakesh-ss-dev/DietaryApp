@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: #598D7B;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .content {
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+        .details {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            Payment Confirmation – [Client Name]
+        </div>
+        <div class="content">
+            <p>Dear <strong>[Coach's Name]</strong>,</p>
+            <p>We are pleased to inform you that the payment for the <strong>[Package Name]</strong> course has been successfully received from <strong>[Client Name]</strong>.</p>
+            
+            <div class="details">
+                <p><strong>Payment Details:</strong></p>
+                <p><strong>Package Name:</strong> [Package Name]</p>
+                <p><strong>Course Fee:</strong> ₹[Base Amount]</p>
+                <p><strong>Discount Applied:</strong> ₹[Discount Amount]</p>
+                <p><strong>GST (18%):</strong> ₹[GST Amount]</p>
+                <p><strong>Total Amount:</strong> ₹[Final Amount]</p>
+                <p><strong>Amount Paid:</strong> ₹[Amount Paid]</p>
+                <p><strong>Due Amount:</strong> ₹[Due Amount]</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

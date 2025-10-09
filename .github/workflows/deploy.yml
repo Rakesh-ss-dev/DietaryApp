@@ -1,0 +1,52 @@
+name: Deploy MERN App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to AWS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AWS_SSH_HOST }}
+          username: ${{ secrets.AWS_SSH_USER }}
+          key: ${{ secrets.AWS_SSH_KEY }}
+          script: |
+            cd ~/wow-app || git clone https://github.com/Rakesh-ss-dev/wow-app.git ~/wow-app && cd ~/wow-app
+            git fetch --all
+            git reset --hard origin/main
+
+            # --------------------------
+            # Clean old frontend and backend to save disk space
+            # --------------------------
+            cd frontend
+            sudo rm -rf node_modules dist
+            sudo npm cache clean --force
+            sudo npm install
+            sudo npm run build
+
+            # Replace frontend build
+            sudo rm -rf /var/www/html/wow-frontend/*
+            sudo cp -r dist/* /var/www/html/wow-frontend/
+
+            # --------------------------
+            # Backend setup
+            # --------------------------
+            cd ../backend
+            rm -rf node_modules
+            npm install
+
+            pm2 restart wow-backend || pm2 start server.js --name "wow-backend"
+            pm2 flush   # clean PM2 logs
+            # --------------------------
+            # Nginx restart (keep configs)
+            # --------------------------
+            sudo systemctl restart nginx
