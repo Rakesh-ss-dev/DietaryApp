@@ -66,14 +66,11 @@ const Payment_successful = () => {
           </p>
           <div className="flex flex-col md:flex-row items-center gap-4">
             <div className="w-2/3">
-              <p className="font-bold">Welcome to WoW!</p>
+              <p className="font-bold">Welcome to Ojas Synergy!</p>
               <p>
                 Your transformation starts now! Get ready for a healthier,
                 happier you. Our team will reach out soon with the next steps.
               </p>
-            </div>
-            <div className="w-1/3 hidden md:block">
-              <img src=".\images\wowshape.svg" alt="" />
             </div>
           </div>
         </div>
@@ -88,7 +85,7 @@ const Payment_successful = () => {
         </div>
         {/* <!-- Footer --> */}
         <p className="absolute text-sm text-center text-gray-500 -translate-x-1/2 bottom-6 left-1/2 dark:text-gray-400">
-          &copy; {new Date().getFullYear()} - WOW
+          &copy; {new Date().getFullYear()} - Ojas Synergy
         </p>
       </div>
     </>

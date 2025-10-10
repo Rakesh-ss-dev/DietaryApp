@@ -175,9 +175,9 @@ router.post("/forgot", async (req, res) => {
         },
       });
       const mailOptions = {
-        from: `"WOW" <${process.env.EMAIL_USER}>`,
+        from: `"Ojas Synergy" <${process.env.EMAIL_USER}>`,
         to: `${user.email}`,
-        subject: `Forgot Password || WOW`,
+        subject: `Forgot Password || Ojas Synergy`,
         html: emailContent,
       };
       await transporter.sendMail(mailOptions);

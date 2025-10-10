@@ -36,7 +36,7 @@ const MyComponent = () => {
   }, []);
 
   return (
-    <ComponentCard className="w-3/4 mx-auto md:w-1/2" title="Wow Monthly Report">
+    <ComponentCard className="w-3/4 mx-auto md:w-1/2" title="Monthly Report">
       <div className="space-y-6 text-center">
         {loading ? (
           <p className="text-gray-600">🔄 Generating and uploading report...</p>

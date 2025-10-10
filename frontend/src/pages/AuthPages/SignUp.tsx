@@ -6,8 +6,8 @@ export default function SignUp() {
   return (
     <>
       <PageMeta
-        title="WOW Sign Up"
-        description="This is the Sign Up page for WOW"
+        title="Sign Up"
+        description="This is the Sign Up page"
       />
       <AuthLayout>
         <SignUpForm />

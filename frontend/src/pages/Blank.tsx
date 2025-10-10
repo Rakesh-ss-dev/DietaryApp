@@ -8,7 +8,7 @@ export default function Blank() {
   const [oldUsers, setOldUsers] = useState(false);
   return (
     <div>
-      <PageMeta title="WOW dashboard" description="Wow Dashboard" />
+      <PageMeta title="Dashboard" description="Dashboard" />
       <PageBreadcrumb pageTitle="Dashboard" />
       <div className="grid grid-cols-2 items-center gap-x-1 gap-y-2 rounded-lg bg-gray-100 p-0.5 dark:bg-gray-900">
         <button
@@ -16,11 +16,10 @@ export default function Blank() {
             setPaidUsers(true);
             setOldUsers(false);
           }}
-          className={`inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-md group hover:text-gray-900 dark:hover:text-white ${
-            paidUsers
+          className={`inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-md group hover:text-gray-900 dark:hover:text-white ${paidUsers
               ? "text-gray-900 dark:text-white bg-white dark:bg-gray-800"
               : "text-gray-500 dark:text-gray-400"
-          }`}
+            }`}
         >
           Paid Users
         </button>
@@ -29,11 +28,10 @@ export default function Blank() {
             setPaidUsers(false);
             setOldUsers(true);
           }}
-          className={`inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-md group hover:text-gray-900 dark:hover:text-white ${
-            oldUsers
+          className={`inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-md group hover:text-gray-900 dark:hover:text-white ${oldUsers
               ? "text-gray-900 dark:text-white bg-white dark:bg-gray-800"
               : "text-gray-500 dark:text-gray-400"
-          }`}
+            }`}
         >
           Old Users
         </button>
