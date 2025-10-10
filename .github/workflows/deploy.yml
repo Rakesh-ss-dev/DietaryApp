@@ -34,8 +34,8 @@ jobs:
             sudo npm run build
 
             # Replace frontend build
-            sudo rm -rf /var/www/html/wow-frontend/*
-            sudo cp -r dist/* /var/www/html/wow-frontend/
+            sudo rm -rf /var/www/html/dietary-app-frontend/*
+            sudo cp -r dist/* /var/www/html/dietary-app-frontend/
 
             # --------------------------
             # Backend setup
@@ -44,7 +44,7 @@ jobs:
             rm -rf node_modules
             npm install
 
-            pm2 restart wow-backend || pm2 start server.js --name "wow-backend"
+            pm2 restart dietary-app-backend || pm2 start server.js --name "dietary-app-backend"
             pm2 flush   # clean PM2 logs
             # --------------------------
             # Nginx restart (keep configs)
