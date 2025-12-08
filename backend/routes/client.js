@@ -5,8 +5,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const clientMiddleware = require("../middleware/clientMiddleware");
 const HealthReport = require("../models/HealthReport");
-const DailyWeight = require("../models/DailyWeight");
-const Diabetes = require("../models/Diabetes");
 const User = require("../models/User");
 
 router.post("/register", async (req, res) => {
@@ -150,14 +148,14 @@ router.post("/addReport", clientMiddleware, async (req, res) => {
     const {
       height,
       weight,
-      vitaminD,
-      vitaminB12,
-      iron,
-      hba1c,
-      triglycerides,
-      hdl,
-      tsh,
-      uricAcid,
+      chest,
+      waist,
+      biceps,
+      hips,
+      systolic,
+      diastolic,
+      fasting,
+      postMeal,
     } = req.body;
 
     const report = new HealthReport({
@@ -165,22 +163,14 @@ router.post("/addReport", clientMiddleware, async (req, res) => {
       date,
       height,
       weight,
-      vitamins: {
-        vitaminD,
-        vitaminB12,
-        iron,
-      },
-      diabetesAndLipidProfile: {
-        hba1c,
-        triglycerides,
-        hdl,
-      },
-      thyroidAndUricAcid: {
-        tsh,
-        uricAcid,
-      },
+      chest,
+      waist,
+      biceps,
+      hips,
+      bloodPressure: { systolic, diastolic },
+      sugarLevels: { fasting, postMeal },
     });
-    const saved = await report.save();
+    await report.save();
     res.status(201).json({ message: "Report Submitted Successfully" });
   } catch (error) {
     res.status(500).json({ message: "Failed to save health report", error });

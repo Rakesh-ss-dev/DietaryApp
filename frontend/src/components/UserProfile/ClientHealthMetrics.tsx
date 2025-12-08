@@ -161,57 +161,6 @@ const ClientHealthCard: React.FC<ClientHealthCardProp> = ({ userId }) => {
               />
             </div>
           </div>
-
-          <div className="rounded-2xl shadow-md">
-            <h2 className="bg-brand-500 text-white rounded-t-2xl p-3">
-              Diabetes & Lipid Profile
-            </h2>
-            <div className="p-6">
-              <MetricBar
-                label="HbA1c"
-                value={healthData?.diabetesAndLipidProfile.hba1c}
-                min={4}
-                max={6.4}
-                unit="%"
-              />
-              <MetricBar
-                label="Triglycerides"
-                value={healthData?.diabetesAndLipidProfile.triglycerides}
-                min={0}
-                max={150}
-                unit="mg/dL"
-              />
-              <MetricBar
-                label="HDL"
-                value={healthData?.diabetesAndLipidProfile.hdl}
-                min={40}
-                max={80}
-                unit="mg/dL"
-              />
-            </div>
-          </div>
-
-          <div className="rounded-2xl shadow-md">
-            <h2 className="bg-brand-500 text-white rounded-t-2xl p-3">
-              Thyroid & Uric Acid
-            </h2>
-            <div className="p-6">
-              <MetricBar
-                label="TSH"
-                value={healthData?.thyroidAndUricAcid.tsh}
-                min={0.5}
-                max={4.5}
-                unit="µIU/mL"
-              />
-              <MetricBar
-                label="Uric Acid"
-                value={healthData?.thyroidAndUricAcid.uricAcid}
-                min={2.4}
-                max={7.0}
-                unit="mg/dL"
-              />
-            </div>
-          </div>
         </div>)}
     </div>
   );

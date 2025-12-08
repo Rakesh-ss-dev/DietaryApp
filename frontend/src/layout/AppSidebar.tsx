@@ -16,8 +16,6 @@ import {
   PaperPlaneIcon,
   UserCircleIcon,
   DocsIcon,
-  DollarLineIcon,
-  ListIcon,
 } from "../icons";
 
 type NavItem = {
@@ -35,38 +33,22 @@ const navItems: NavItem[] = [
     path: "/user-dashboard",
   },
   {
+    icon: <DocsIcon />,
+    name: "Gyms",
+    path: "/gyms",
+  },
+  {
+    icon: <UserCircleIcon />,
+    name: "Trainers",
+    path: "/trainers",
+    role: "Super-User",
+  },
+  {
     icon: <PaperPlaneIcon />,
-    name: "Paid Requests",
-    path: "/requests",
-  },
-  {
-    icon: <ListIcon />,
-    name: "Pending Requests",
-    path: "/pending_requests",
-  },
-  {
-    icon: <DollarLineIcon />,
-    name: "Pending Installments",
-    path: "/installments",
+    name: "Clients",
+    path: "/clients",
   },
 
-  {
-    icon: <UserCircleIcon />,
-    name: "Coaches",
-    path: "/coaches",
-    role: "Super-User",
-  },
-  {
-    icon: <UserCircleIcon />,
-    name: "Self Registered",
-    path: "/self-registered",
-  },
-  {
-    icon: <DocsIcon />,
-    name: "Reports",
-    path: "/generate-report",
-    role: "Super-User",
-  },
 ];
 
 const AppSidebar: React.FC = () => {
