@@ -36,8 +36,9 @@ const TrainerList = () => {
             header: "Mobile"
         },
         {
-            accessorKey: "location",
-            header: "Location"
+            accessorKey: "assignedTo",
+            header: "Assigned To",
+            cell: ({ row }) => row.original.assignedTo?.name
         },
         {
             id: "actions",

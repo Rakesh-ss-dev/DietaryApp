@@ -26,6 +26,7 @@ import GYMForm from "./components/Forms/GYMForm";
 import { Toaster } from "react-hot-toast";
 import DeleteGym from "./components/Forms/DeleteGym";
 import TrainerForm from "./components/Forms/TrainerForm";
+import DeleteTrainer from "./components/Forms/DeleteTrainer";
 const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
 
 export default function App() {
@@ -78,6 +79,7 @@ export default function App() {
             <Route path="/trainers" element={<TrainerList />} />
             <Route path="/add-trainer" element={<TrainerForm />} />
             <Route path="/edit-trainer/:trainerId" element={<TrainerForm />} />
+            <Route path="/delete-trainer/:trainerId" element={<DeleteTrainer />} />
           </Route>
 
           <Route element={<ProtectedRoute allowedRole="patient"><UserLayout /></ProtectedRoute>}>

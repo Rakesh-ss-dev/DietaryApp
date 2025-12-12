@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const authMiddleware = require("../middleware/clientMiddleware");
+const bcrypt = require("bcryptjs");
 
 router.get("/list", authMiddleware, async (req, res) => {
   try {

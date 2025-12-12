@@ -15,9 +15,48 @@ router.get("/list", authMiddleware, async (req, res) => {
   }
 });
 
+router.get("/details/:trainerId", authMiddleware, async (req, res) => {
+  try {
+    const { trainerId } = req.params;
+    const trainer = await User.findById(trainerId).select("-password");
+    res.status(200).json(trainer);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+router.patch("/edit/:trainerId", authMiddleware, async (req, res) => {
+  try {
+    const { name, mobile, email, assignedTo } = req.body;
+    const { trainerId } = req.params;
+    const trainer = await User.findById(trainerId).select("-password");
+    if (!trainer) {
+      return res.status(404).json({ error: "Gym not found" });
+    }
+    if (name) trainer.name = name;
+    if (mobile) trainer.mobile = mobile;
+    if (email) trainer.email = email;
+    if (assignedTo) trainer.location = assignedTo;
+    await trainer.save();
+    res.json(trainer);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+router.delete("/delete/:trainerId", authMiddleware, async (req, res) => {
+  try {
+    const { trainerId } = req.params;
+    await User.findByIdAndDelete(trainerId);
+    res.status(200).json({ message: "Trainer Deleted Successfully !!" });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 router.post("/add", authMiddleware, async (req, res) => {
   try {
-    const { name, location, mobile, password, email, assignedTo } = req.body;
+    const { name, mobile, password, email, assignedTo } = req.body;
     const existingMobile = await User.findOne({ mobile });
     const existingEmail = await User.findOne({ email });
     if (existingEmail) {
@@ -34,7 +73,6 @@ router.post("/add", authMiddleware, async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
     const newUser = new User({
       name,
-      location,
       mobile,
       password: hashedPassword,
       email,

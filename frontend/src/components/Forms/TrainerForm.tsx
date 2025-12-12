@@ -22,23 +22,45 @@ const TrainerForm = () => {
         const formatedGyms = response.data.map((gym: any) => ({ value: gym._id, label: gym.name }));
         setGyms(formatedGyms);
     }
+    const getTrainer = async () => {
+        const response = await axiosInstance.get(`trainer/details/${trainerId}`);
+        const trainer = response.data;
+        setName(trainer.name);
+        setEmail(trainer.email);
+        setMobile(trainer.mobile);
+        setSelectedGym(trainer.assignedTo._id);
+    }
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
-            await axiosInstance.post("/trainer/add", {
-                name,
-                email,
-                password,
-                mobile,
-                assignedTo: selectedGym
-            })
-            toast.success("Trainer Added Successfully");
-            navigate('/trainers');
+            if (!trainerId) {
+                await axiosInstance.post("/trainer/add", {
+                    name,
+                    email,
+                    password,
+                    mobile,
+                    assignedTo: selectedGym
+                })
+                toast.success("Trainer Added Successfully");
+                navigate('/trainers');
+            }
+            else {
+                await axiosInstance.patch(`/trainer/edit/${trainerId}`, {
+                    name,
+                    email, mobile,
+                    assignedTo: selectedGym
+                });
+                toast.success("Trainer Updated Successfully");
+                navigate('/trainers');
+            }
         }
         catch (err) {
             console.error(err);
         }
     }
+    useEffect(() => {
+        getTrainer();
+    }, [trainerId])
     useEffect(() => {
         getGyms();
     }, [])
@@ -61,7 +83,7 @@ const TrainerForm = () => {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="Assignedto">Assigned To</label>
-                            <Select options={gyms} onChange={(gym: any) => setSelectedGym(gym)} />
+                            <Select options={gyms} defaultValue={selectedGym} onChange={(gym: any) => setSelectedGym(gym)} />
                         </div>
                         {trainerId ? "" : <div className="mb-3">
                             <Label htmlFor="password" >Password</Label>
