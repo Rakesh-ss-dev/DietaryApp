@@ -17,6 +17,7 @@ const TrainerForm = () => {
     const [password, setPassword] = useState("");
     const [gyms, setGyms] = useState<any[]>([]);
     const [selectedGym, setSelectedGym] = useState();
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
     const getGyms = async () => {
         const response = await axiosInstance.get(`gym/list`);
         const formatedGyms = response.data.map((gym: any) => ({ value: gym._id, label: gym.name }));
@@ -81,10 +82,11 @@ const TrainerForm = () => {
                             <Label htmlFor="contactNumber" >Contact Number</Label>
                             <Input required type="tel" id="contactNumber" value={mobile} onChange={(e) => setMobile(e.target.value)} name="contactNumber" placeholder="Enter Contact Number" />
                         </div>
-                        <div className="mb-3">
-                            <label htmlFor="Assignedto">Assigned To</label>
-                            <Select options={gyms} defaultValue={selectedGym} onChange={(gym: any) => setSelectedGym(gym)} />
-                        </div>
+                        {user.accessModule === "Gym" ? null : (
+                            <div className="mb-3">
+                                <label htmlFor="Assignedto">Assigned To</label>
+                                <Select options={gyms} defaultValue={selectedGym} onChange={(gym: any) => setSelectedGym(gym)} />
+                            </div>)}
                         {trainerId ? "" : <div className="mb-3">
                             <Label htmlFor="password" >Password</Label>
                             <Input required type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} name="password" placeholder="Enter Password" />

@@ -11,16 +11,16 @@ const ClientInfoCard = () => {
   const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
   const token = localStorage.getItem("token");
   const patient: any = localStorage.getItem("patient");
-  const parsedPatient = JSON.parse(patient);
-  const [name, setName] = useState(parsedPatient?.name || "");
+  const parsedClient = JSON.parse(patient);
+  const [name, setName] = useState(parsedClient?.name || "");
   const [dateOfBirth, setDateOfBirth] = useState(
-    parsedPatient.date_of_birth || ""
+    parsedClient.date_of_birth || ""
   );
-  const [gender, setGender] = useState(parsedPatient.gender || "");
-  const [email, setEmail] = useState(parsedPatient.email || "");
-  const [bloodGroup, setBloodGroup] = useState(parsedPatient.bloodGroup || '')
+  const [gender, setGender] = useState(parsedClient.gender || "");
+  const [email, setEmail] = useState(parsedClient.email || "");
+  const [bloodGroup, setBloodGroup] = useState(parsedClient.bloodGroup || '')
   const { isOpen, openModal, closeModal } = useModal();
-  const payedAt = new Date(parsedPatient.payed_at);
+  const payedAt = new Date(parsedClient.payed_at);
   const formattedDate = payedAt.toLocaleString('en-IN', {
     timeZone: 'Asia/Kolkata',
     day: '2-digit',
@@ -182,7 +182,7 @@ const ClientInfoCard = () => {
               Full Name
             </p>
             <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-              {parsedPatient.name}
+              {parsedClient.name}
             </p>
           </div>
           <div>
@@ -190,7 +190,7 @@ const ClientInfoCard = () => {
               Date Of Birth
             </p>
             <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-              {toLocalDateString(new Date(parsedPatient.date_of_birth)) ||
+              {toLocalDateString(new Date(parsedClient.date_of_birth)) ||
                 "Not Entered"}
             </p>
           </div>
@@ -199,7 +199,7 @@ const ClientInfoCard = () => {
               Gender
             </p>
             <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-              {parsedPatient.gender || "Not Entered"}
+              {parsedClient.gender || "Not Entered"}
             </p>
           </div>
           <div>
@@ -207,7 +207,7 @@ const ClientInfoCard = () => {
               Blood Group
             </p>
             <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-              {parsedPatient.bloodGroup || "Not Entered"}
+              {parsedClient.bloodGroup || "Not Entered"}
             </p>
           </div>
           <div>
@@ -215,7 +215,7 @@ const ClientInfoCard = () => {
               Email address
             </p>
             <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-              {parsedPatient.email || "Not Entered"}
+              {parsedClient.email || "Not Entered"}
             </p>
           </div>
           <div>
@@ -223,12 +223,12 @@ const ClientInfoCard = () => {
               Phone
             </p>
             <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-              {parsedPatient.phone || "Not Entered"}
+              {parsedClient.phone || "Not Entered"}
             </p>
           </div>
         </div>
       </div>
-      {parsedPatient.package &&
+      {parsedClient.package &&
         <div className="p-5 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div>
@@ -243,7 +243,7 @@ const ClientInfoCard = () => {
                 Package Name
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                {parsedPatient.package?.name}
+                {parsedClient.package?.name}
               </p>
             </div>
             <div>
@@ -251,7 +251,7 @@ const ClientInfoCard = () => {
                 Amount
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                {parsedPatient.amount}
+                {parsedClient.amount}
               </p>
             </div>
             <div>
@@ -267,7 +267,7 @@ const ClientInfoCard = () => {
                 Coach Name
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                {parsedPatient.createdBy.name}
+                {parsedClient.createdBy.name}
               </p>
             </div>
           </div>

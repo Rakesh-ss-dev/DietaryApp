@@ -9,14 +9,12 @@ import NotFound from "./pages/OtherPage/NotFound";
 import UserProfiles from "./pages/UserProfiles";
 import RequestList from "./pages/Clients/ClientList";
 import UserDataTableRes from "./pages/UserDataTable/UserDataTableRes";
-import CreateRequest from "./pages/Clients/CreateRequest";
 import { useEffect } from "react";
 import UserDashboard from "./pages/Dashboard/UserDashboard";
 import HealthReportForm from "./pages/ClientPages/HealthReportForm";
 import ClientProfile from "./pages/ClientProfile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ClientDetails from "./components/UserProfile/ClientDetails";
-import HealthLifestyleForm from "./pages/HealthLifestyleForm";
 import SugarInputForm from "./pages/ClientPages/SugarInputForm";
 import WeightInputForm from "./pages/ClientPages/WeightInputForm";
 import SignUp from "./pages/AuthPages/SignUp";
@@ -27,6 +25,11 @@ import { Toaster } from "react-hot-toast";
 import DeleteGym from "./components/Forms/DeleteGym";
 import TrainerForm from "./components/Forms/TrainerForm";
 import DeleteTrainer from "./components/Forms/DeleteTrainer";
+import CreateClient from "./pages/Clients/Create-Client";
+import PackageList from "./pages/Package/PackageList";
+import PackageForm from "./components/Packages/PackageForm";
+import DeletePackage from "./components/Packages/DeletePackage";
+import HealthDashboard from "./components/UserProfile/HealthDashboard";
 const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
 
 export default function App() {
@@ -60,17 +63,16 @@ export default function App() {
             <Route path="/" element={<UserLogin />} />
             <Route path="/admin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/health-form" element={<HealthLifestyleForm />} />
           </Route>
 
           <Route element={<ProtectedRoute allowedRole="user"><AppLayout /></ProtectedRoute>}>
             <Route path="/user-dashboard" element={<Blank />} />
             <Route path="/profile" element={<UserProfiles />} />
             <Route path="/clients" element={<RequestList />} />
-            <Route path="/create-request" element={<CreateRequest />} />
+            <Route path="/create-client" element={<CreateClient />} />
             <Route path="/coaches" element={<UserDataTableRes />} />
-            <Route path="/client-details/:userId" element={<ClientDetails />} />
-
+            <Route path="/client-details/:clientId" element={<ClientDetails />} />
+            <Route path="/health-dashboard/:clientId" element={<HealthDashboard />} />
             <Route path="/gyms" element={<GymList />} />
             <Route path="/add-gym" element={<GYMForm />} />
             <Route path="/edit-gym/:gymId" element={<GYMForm />} />
@@ -80,6 +82,11 @@ export default function App() {
             <Route path="/add-trainer" element={<TrainerForm />} />
             <Route path="/edit-trainer/:trainerId" element={<TrainerForm />} />
             <Route path="/delete-trainer/:trainerId" element={<DeleteTrainer />} />
+
+            <Route path="/packages" element={<PackageList />} />
+            <Route path='/add-package' element={<PackageForm />} />
+            <Route path='/edit-package/:packageId' element={<PackageForm />} />
+            <Route path='/delete-package/:packageId' element={<DeletePackage />} />
           </Route>
 
           <Route element={<ProtectedRoute allowedRole="patient"><UserLayout /></ProtectedRoute>}>

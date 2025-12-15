@@ -6,9 +6,19 @@ const User = require("../models/User");
 
 router.get("/list", authMiddleware, async (req, res) => {
   try {
-    const gyms = await User.find({ accessModule: "Trainer" })
-      .select("-password")
-      .populate("assignedTo");
+    let gyms;
+    if (req.user.isSuperUser) {
+      gyms = await User.find({ accessModule: "Trainer" })
+        .select("-password")
+        .populate("assignedTo");
+    } else {
+      gyms = await User.find({
+        accessModule: "Trainer",
+        assignedTo: req.user._id,
+      })
+        .select("-password")
+        .populate("assignedTo");
+    }
     res.status(200).json(gyms);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -27,8 +37,11 @@ router.get("/details/:trainerId", authMiddleware, async (req, res) => {
 
 router.patch("/edit/:trainerId", authMiddleware, async (req, res) => {
   try {
-    const { name, mobile, email, assignedTo } = req.body;
+    let { name, mobile, email, assignedTo } = req.body;
     const { trainerId } = req.params;
+    if (req.user.accessModule === "Gym") {
+      assignedTo = req.user._id;
+    }
     const trainer = await User.findById(trainerId).select("-password");
     if (!trainer) {
       return res.status(404).json({ error: "Gym not found" });
@@ -56,7 +69,10 @@ router.delete("/delete/:trainerId", authMiddleware, async (req, res) => {
 
 router.post("/add", authMiddleware, async (req, res) => {
   try {
-    const { name, mobile, password, email, assignedTo } = req.body;
+    let { name, mobile, password, email, assignedTo } = req.body;
+    if (req.user.accessModule === "Gym") {
+      assignedTo = req.user._id;
+    }
     const existingMobile = await User.findOne({ mobile });
     const existingEmail = await User.findOne({ email });
     if (existingEmail) {

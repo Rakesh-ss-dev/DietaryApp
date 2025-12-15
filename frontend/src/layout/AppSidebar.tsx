@@ -17,6 +17,7 @@ import {
   UserCircleIcon,
   DocsIcon,
 } from "../icons";
+import { Package } from "lucide-react";
 
 type NavItem = {
   name: string;
@@ -26,28 +27,35 @@ type NavItem = {
   subItems?: { name: string; path: string; pro?: boolean; new?: boolean }[];
 };
 
-const navItems: NavItem[] = [
+let navItems: NavItem[] = [
   {
     icon: <GridIcon />,
     name: "Dashboard",
     path: "/user-dashboard",
   },
   {
+    icon: <Package width={15} />,
+    name: "Packages",
+    path: "/packages",
+    role: "Super-User",
+  },
+  {
     icon: <DocsIcon />,
     name: "Gyms",
     path: "/gyms",
+    role: "Super-User"
   },
   {
     icon: <UserCircleIcon />,
     name: "Trainers",
     path: "/trainers",
-    role: "Super-User",
   },
   {
     icon: <PaperPlaneIcon />,
     name: "Clients",
     path: "/clients",
   },
+
 
 ];
 
@@ -72,6 +80,11 @@ const AppSidebar: React.FC = () => {
 
   const filteredNavItems = useMemo(() => {
     const userRole = parsedUser?.isSuperUser ? "Super-User" : undefined;
+    if (parsedUser?.accessModule === "Trainer") {
+      navItems = navItems.filter(item => item.name !== "Gyms");
+      navItems = navItems.filter(item => item.name !== "Packages");
+      navItems = navItems.filter(item => item.name !== "Trainers");
+    }
     return navItems.filter((item) => !item.role || item.role === userRole);
   }, [parsedUser]);
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();

@@ -1,6 +1,6 @@
 const express = require("express");
 const Package = require("../models/Package");
-const Patient = require("../models/Patients");
+const Client = require("../models/Client");
 const authMiddleware = require("../middleware/authMiddleware");
 const User = require("../models/User");
 const { default: mongoose } = require("mongoose");
@@ -32,10 +32,10 @@ router.post("/create-client", authMiddleware, async (req, res) => {
         .json({ success: false, message: "Invalid package selected" });
     }
 
-    const ref = await Patient.findOne({ phone: referrerPhone });
+    const ref = await Client.findOne({ phone: referrerPhone });
 
     // 4) Persist
-    const patient = new Patient({
+    const patient = new Client({
       name,
       phone,
       countryCode,
@@ -63,12 +63,12 @@ router.get("/get_clients", authMiddleware, async (req, res) => {
     const userData = await User.findById(user);
     let requests;
     if (userData.isSuperUser) {
-      requests = await Patient.find({})
+      requests = await Client.find({})
         .populate("package", "name amount")
         .populate("createdBy", "name email")
         .exec();
     } else {
-      requests = await Patient.find({
+      requests = await Client.find({
         createdBy: userData._id,
         status: "paid",
         installment: { $ne: "Installment 2" },
@@ -88,7 +88,7 @@ router.get("/getRequests/:userId", authMiddleware, async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(400).json({ message: "Invalid user ID format" });
     }
-    const user = await Patient.findById(userId).populate("package").exec();
+    const user = await Client.findById(userId).populate("package").exec();
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -109,7 +109,7 @@ router.get("/health-metrics/:userId", authMiddleware, async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(400).json({ message: "Invalid user ID format" });
     }
-    const user = await Patient.findById(userId).populate("package").exec();
+    const user = await Client.findById(userId).populate("package").exec();
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }

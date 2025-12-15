@@ -3,11 +3,11 @@ import ClientHealthCard from "./ClientHealthMetrics";
 import { useParams } from "react-router";
 
 const ClientDetails = () => {
-    const {userId} =useParams();
+  const { clientId } = useParams();
   return (
     <div>
-      <ClientHealthCard userId={userId} />
-      <ClientMetricCharts userId={userId} />
+      <ClientHealthCard userId={clientId} />
+      <ClientMetricCharts userId={clientId} />
     </div>
   );
 };
