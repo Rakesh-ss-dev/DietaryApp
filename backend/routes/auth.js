@@ -72,6 +72,7 @@ router.get("/users", authMiddleware, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 router.post("/update-user", authMiddleware, async (req, res) => {
   try {
     const name = req.body.name;
