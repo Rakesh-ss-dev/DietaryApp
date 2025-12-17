@@ -10,7 +10,8 @@ interface Trainer {
     email: string,
     mobile: string,
     location: string,
-    assignedTo: any
+    assignedTo: any,
+    clientNumber: number
 }
 const TrainerList = () => {
     const navigate = useNavigate();
@@ -39,6 +40,10 @@ const TrainerList = () => {
             accessorKey: "assignedTo",
             header: "Assigned To",
             cell: ({ row }) => row.original.assignedTo?.name
+        },
+        {
+            accessorKey: "clientNumber",
+            header: "Number of Clients",
         },
         {
             id: "actions",

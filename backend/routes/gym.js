@@ -45,6 +45,11 @@ router.patch("/edit/:gymId", authMiddleware, async (req, res) => {
 router.delete("/delete/:gymId", authMiddleware, async (req, res) => {
   try {
     const { gymId } = req.params;
+    const trainers = await User.find({ assignedTo: gymId });
+    for (let trainer of trainers) {
+      trainer.assignedTo = null;
+      await trainer.save();
+    }
     await User.findByIdAndDelete(gymId);
     res.status(200).json({ message: "Gym Deleted Successfully !!" });
   } catch (e) {

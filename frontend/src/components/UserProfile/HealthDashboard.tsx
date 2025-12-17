@@ -472,7 +472,7 @@ const HealthDashboard = () => {
                                     dataKey="bmi"
                                     name="BMI"
                                     stroke="#10b981"
-                                    strokeWidth={2}
+                                    strokeWidth={3}
                                     strokeDasharray="5 5"
                                     dot={false}
                                 />
@@ -495,8 +495,8 @@ const HealthDashboard = () => {
                                 <Tooltip />
                                 <Legend iconType="circle" wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
                                 <ReferenceLine y={120} stroke="#ef4444" strokeDasharray="3 3" label={{ value: 'Max Normal Sys', fill: '#ef4444', fontSize: 10, position: 'insideBottomRight' }} />
-                                <Line type="monotone" dataKey="bloodPressure.systolic" name="Systolic" stroke="#ef4444" strokeWidth={2} dot={{ r: 3 }} />
-                                <Line type="monotone" dataKey="bloodPressure.diastolic" name="Diastolic" stroke="#f43f5e" strokeWidth={2} strokeOpacity={0.6} dot={{ r: 3 }} />
+                                <Line type="monotone" dataKey="bloodPressure.systolic" name="Systolic" stroke="#ef4444" strokeWidth={3} dot={{ r: 3 }} />
+                                <Line type="monotone" dataKey="bloodPressure.diastolic" name="Diastolic" stroke="#f43f5e" strokeWidth={3} strokeOpacity={0.6} dot={{ r: 3 }} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
@@ -508,7 +508,7 @@ const HealthDashboard = () => {
                 <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100">
                     <div className="mb-6">
                         <h3 className="text-lg font-bold text-gray-800 dark:text-white">Body Measurements</h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">Trends in Waist, Chest, and Hips (cm).</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">Trends in Biceps,Waist, Chest, and Hips (cm).</p>
                     </div>
                     <div className="h-[300px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
@@ -518,9 +518,11 @@ const HealthDashboard = () => {
                                 <YAxis axisLine={false} tickLine={false} tick={{ fill: '#9ca3af', fontSize: 12 }} domain={['auto', 'auto']} />
                                 <Tooltip />
                                 <Legend />
-                                <Line type="monotone" dataKey="measurements.waist" name="Waist" stroke="#f59e0b" strokeWidth={2} />
-                                <Line type="monotone" dataKey="measurements.chest" name="Chest" stroke="#3b82f6" strokeWidth={2} />
-                                <Line type="monotone" dataKey="measurements.hips" name="Hips" stroke="#8b5cf6" strokeWidth={2} />
+                                <Line type="monotone" dataKey="measurements.waist" name="Waist" stroke="#f59e0b" strokeWidth={3} />
+                                <Line type="monotone" dataKey="measurements.chest" name="Chest" stroke="#3b82f6" strokeWidth={3} />
+                                <Line type="monotone" dataKey="measurements.hips" name="Hips" stroke="#8b5cf6" strokeWidth={3} />
+                                <Line type="monotone" dataKey="measurements.biceps" name="Biceps" stroke="#10b981" strokeWidth={3} />
+
                             </LineChart>
                         </ResponsiveContainer>
                     </div>

@@ -3,23 +3,31 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const authMiddleware = require("../middleware/authMiddleware");
 const User = require("../models/User");
+const Client = require("../models/Client");
 
 router.get("/list", authMiddleware, async (req, res) => {
   try {
-    let gyms;
+    let trainers;
     if (req.user.isSuperUser) {
-      gyms = await User.find({ accessModule: "Trainer" })
+      trainers = await User.find({ accessModule: "Trainer" })
         .select("-password")
         .populate("assignedTo");
     } else {
-      gyms = await User.find({
+      trainers = await User.find({
         accessModule: "Trainer",
         assignedTo: req.user._id,
       })
         .select("-password")
         .populate("assignedTo");
     }
-    res.status(200).json(gyms);
+
+    const formattedTrainers = trainers.map(async (trainer) => {
+      const clientList = await Client.find({
+        trainer: trainer.id,
+      }).select("-password");
+      return { ...trainer.toObject(), clientNumber: clientList.length };
+    });
+    res.status(200).json(await Promise.all(formattedTrainers));
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -49,7 +57,7 @@ router.patch("/edit/:trainerId", authMiddleware, async (req, res) => {
     if (name) trainer.name = name;
     if (mobile) trainer.mobile = mobile;
     if (email) trainer.email = email;
-    if (assignedTo) trainer.location = assignedTo;
+    if (assignedTo) trainer.assignedTo = assignedTo;
     await trainer.save();
     res.json(trainer);
   } catch (e) {
@@ -60,6 +68,11 @@ router.patch("/edit/:trainerId", authMiddleware, async (req, res) => {
 router.delete("/delete/:trainerId", authMiddleware, async (req, res) => {
   try {
     const { trainerId } = req.params;
+    const clients = await Client.find({ trainer: trainerId });
+    for (let client of clients) {
+      client.trainer = null;
+      await client.save();
+    }
     await User.findByIdAndDelete(trainerId);
     res.status(200).json({ message: "Trainer Deleted Successfully !!" });
   } catch (e) {
