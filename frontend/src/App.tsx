@@ -61,6 +61,7 @@ export default function App() {
           <Route element={<AuthLayout />}>
             <Route path="/" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/admin" element={<SignIn />} />
           </Route>
 
           <Route element={<ProtectedRoute allowedRole="user"><AppLayout /></ProtectedRoute>}>
