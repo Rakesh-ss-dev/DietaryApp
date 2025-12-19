@@ -3,7 +3,6 @@ import AppLayout from "./layout/AppLayout";
 import UserLayout from "./layout/UserLayout";
 import AuthLayout from "./layout/AuthLayout";
 import SignIn from "./pages/AuthPages/SignIn";
-import UserLogin from "./pages/AuthPages/UserLogin";
 import Blank from "./pages/Blank";
 import NotFound from "./pages/OtherPage/NotFound";
 import UserProfiles from "./pages/UserProfiles";
@@ -60,8 +59,7 @@ export default function App() {
       <Router>
         <Routes>
           <Route element={<AuthLayout />}>
-            <Route path="/" element={<UserLogin />} />
-            <Route path="/admin" element={<SignIn />} />
+            <Route path="/" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
           </Route>
 
