@@ -16,6 +16,11 @@ type Request = {
   package: {
     name: string;
   };
+  trainer?: {
+    name: string;
+  };
+  email: string;
+  city: string;
   createdBy?: {
     name: string;
   };
@@ -41,6 +46,11 @@ const RequestDataTable: React.FC<RequestDataTableProps> = ({ data }) => {
     {
       accessorKey: 'email',
       header: 'Email'
+    },
+    {
+      accessorKey: "trainer",
+      header: "Trainer",
+      cell: ({ row }) => row.original.trainer?.name || "N/A"
     },
     {
       accessorKey: "phone",

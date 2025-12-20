@@ -11,6 +11,9 @@ interface Client {
   package: {
     name: string;
   };
+  trainer: {
+    name: string;
+  };
   email: string;
   city: string;
   _id: string;
