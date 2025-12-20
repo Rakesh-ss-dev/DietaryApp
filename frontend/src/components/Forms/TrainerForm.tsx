@@ -75,7 +75,7 @@ const TrainerForm = () => {
                             <Input required type="text" id="trainerName" value={name} onChange={(e) => setName(e.target.value)} name="name" placeholder="Enter Trainer Name" />
                         </div>
                         <div className="mb-3">
-                            <Label htmlFor="trainerEmail" >Owner's Email</Label>
+                            <Label htmlFor="trainerEmail" >Email</Label>
                             <Input required type="email" id="trainerEmail" value={email} onChange={(e) => setEmail(e.target.value)} name="ownerEmail" placeholder="Enter Trainer's Email" />
                         </div>
                         <div className="mb-3">

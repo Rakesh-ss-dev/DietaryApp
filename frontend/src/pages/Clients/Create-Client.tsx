@@ -265,7 +265,7 @@ const CreateRequest: React.FC = () => {
               disabled={!isFormValid || loading} // Using the consolidated validation variable
               className="w-full mt-2"
             >
-              {loading ? "Processing..." : "Send Payment Link"}
+              {loading ? "Processing..." : "Create Client"}
             </Button>
           </form>
         </div>
