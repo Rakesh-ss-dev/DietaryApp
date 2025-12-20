@@ -1,22 +1,13 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router";
 import AppLayout from "./layout/AppLayout";
-import UserLayout from "./layout/UserLayout";
 import AuthLayout from "./layout/AuthLayout";
 import SignIn from "./pages/AuthPages/SignIn";
 import Blank from "./pages/Blank";
 import NotFound from "./pages/OtherPage/NotFound";
 import UserProfiles from "./pages/UserProfiles";
 import RequestList from "./pages/Clients/ClientList";
-import UserDataTableRes from "./pages/UserDataTable/UserDataTableRes";
 import { useEffect } from "react";
-import UserDashboard from "./pages/Dashboard/UserDashboard";
-import HealthReportForm from "./pages/ClientPages/HealthReportForm";
-import ClientProfile from "./pages/ClientProfile";
 import ProtectedRoute from "./components/ProtectedRoute";
-import ClientDetails from "./components/UserProfile/ClientDetails";
-import SugarInputForm from "./pages/ClientPages/SugarInputForm";
-import WeightInputForm from "./pages/ClientPages/WeightInputForm";
-import SignUp from "./pages/AuthPages/SignUp";
 import GymList from "./pages/Gym/GymList";
 import TrainerList from "./pages/Trainer/TrainerList";
 import GYMForm from "./components/Forms/GYMForm";
@@ -60,7 +51,6 @@ export default function App() {
         <Routes>
           <Route element={<AuthLayout />}>
             <Route path="/" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
             <Route path="/admin" element={<SignIn />} />
           </Route>
 
@@ -69,8 +59,6 @@ export default function App() {
             <Route path="/profile" element={<UserProfiles />} />
             <Route path="/clients" element={<RequestList />} />
             <Route path="/create-client" element={<CreateClient />} />
-            <Route path="/coaches" element={<UserDataTableRes />} />
-            <Route path="/client-details/:clientId" element={<ClientDetails />} />
             <Route path="/health-dashboard/:clientId" element={<HealthDashboard />} />
             <Route path="/gyms" element={<GymList />} />
             <Route path="/add-gym" element={<GYMForm />} />
@@ -86,14 +74,6 @@ export default function App() {
             <Route path='/add-package' element={<PackageForm />} />
             <Route path='/edit-package/:packageId' element={<PackageForm />} />
             <Route path='/delete-package/:packageId' element={<DeletePackage />} />
-          </Route>
-
-          <Route element={<ProtectedRoute allowedRole="patient"><UserLayout /></ProtectedRoute>}>
-            <Route path="/patient-dashboard" element={<WeightInputForm />} />
-            <Route path="/add-report" element={<HealthReportForm />} />
-            <Route path="/view-reports" element={<UserDashboard />} />
-            <Route path="/view-profile" element={<ClientProfile />} />
-            <Route path="/sugar-input" element={<SugarInputForm />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
