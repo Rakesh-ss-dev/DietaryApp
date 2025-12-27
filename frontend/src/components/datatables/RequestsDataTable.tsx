@@ -8,6 +8,7 @@ import {
   ColumnDef,
 } from "@tanstack/react-table";
 import { useNavigate } from "react-router";
+import formatReadableDateTime from "../../utils/formateDateTime";
 
 type Request = {
   name: string;
@@ -24,6 +25,7 @@ type Request = {
   createdBy?: {
     name: string;
   };
+  createdAt: string;
 };
 
 interface RequestDataTableProps {
@@ -44,10 +46,6 @@ const RequestDataTable: React.FC<RequestDataTableProps> = ({ data }) => {
       header: "Client",
     },
     {
-      accessorKey: 'email',
-      header: 'Email'
-    },
-    {
       accessorKey: "trainer",
       header: "Trainer",
       cell: ({ row }) => row.original.trainer?.name || "N/A"
@@ -56,14 +54,16 @@ const RequestDataTable: React.FC<RequestDataTableProps> = ({ data }) => {
       accessorKey: "phone",
       header: "Phone Number"
     },
-    {
-      accessorKey: "city",
-      header: "Location"
-    },
+
     {
       accessorFn: (row) => row.package?.name,
       id: "package.name",
       header: "Package",
+    },
+    {
+      accessorKey: "createdAt",
+      header: "Joined At",
+      cell: ({ row }) => { return formatReadableDateTime(new Date(row.original.createdAt)) }
     },
     {
       id: "actions",

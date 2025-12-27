@@ -4,6 +4,7 @@ import ComponentCard from "../../components/common/ComponentCard"
 import { ColumnDef } from "@tanstack/react-table";
 import { useNavigate } from "react-router";
 import { DataTable } from "../../components/datatables/DataTable";
+import formatReadableDateTime from "../../utils/formateDateTime";
 interface Trainer {
     _id: string,
     name: String,
@@ -11,7 +12,8 @@ interface Trainer {
     mobile: string,
     location: string,
     assignedTo: any,
-    clientNumber: number
+    clientNumber: number,
+    createdAt: string,
 }
 const TrainerList = () => {
     const navigate = useNavigate();
@@ -44,6 +46,11 @@ const TrainerList = () => {
         {
             accessorKey: "clientNumber",
             header: "Number of Clients",
+        },
+        {
+            accessorKey: "createdAt",
+            header: "Joined At",
+            cell: ({ row }) => { return formatReadableDateTime(new Date(row.original.createdAt)) }
         },
         {
             id: "actions",
