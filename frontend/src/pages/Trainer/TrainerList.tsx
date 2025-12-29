@@ -19,7 +19,6 @@ const TrainerList = () => {
     const navigate = useNavigate();
     const [trainers, setTrainers] = useState<Trainer[]>([]);
     const user = JSON.parse(localStorage.getItem("user") || "{}");
-    console.log(user);
     const getTrainers = async () => {
         const response = await axiosInstance.get('trainer/list');
         setTrainers(response.data);
