@@ -18,6 +18,8 @@ interface Trainer {
 const TrainerList = () => {
     const navigate = useNavigate();
     const [trainers, setTrainers] = useState<Trainer[]>([]);
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    console.log(user);
     const getTrainers = async () => {
         const response = await axiosInstance.get('trainer/list');
         setTrainers(response.data);
@@ -29,10 +31,6 @@ const TrainerList = () => {
         {
             accessorKey: 'name',
             header: "Name",
-        },
-        {
-            accessorKey: "email",
-            header: "Email",
         },
         {
             accessorKey: 'mobile',
@@ -75,6 +73,9 @@ const TrainerList = () => {
             },
         },
     ]
+    if (!user.isSuperUser) {
+        column.splice(2, 1);
+    }
     return (
         <ComponentCard title="Trainers List" createLink={'/add-trainer'} createTitle="Add Trainer" >
             <DataTable columns={column} data={trainers} />
