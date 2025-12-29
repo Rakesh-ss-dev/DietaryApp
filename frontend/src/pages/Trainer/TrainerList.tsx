@@ -73,7 +73,7 @@ const TrainerList = () => {
             },
         },
     ]
-    if (!user.isSuperUser) {
+    if (user.accessModule == "Gym" || user.accessModule == "Trainer") {
         column.splice(2, 1);
     }
     return (
