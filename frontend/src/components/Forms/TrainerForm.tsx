@@ -84,7 +84,7 @@ const TrainerForm = () => {
                         </div>
                         {user.accessModule === "Gym" ? null : (
                             <div className="mb-3">
-                                <label htmlFor="Assignedto">Assigned To</label>
+                                <Label htmlFor="Assignedto">Assigned To</Label>
                                 <Select options={gyms} defaultValue={selectedGym} onChange={(gym: any) => setSelectedGym(gym)} />
                             </div>)}
                         {trainerId ? "" : <div className="mb-3">

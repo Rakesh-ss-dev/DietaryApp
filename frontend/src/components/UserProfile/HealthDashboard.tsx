@@ -366,24 +366,24 @@ const HealthDashboard = () => {
                     {/* Section: Body Measurements */}
                     <div>
                         <h3 className="text-sm font-bold uppercase text-gray-400 mb-3 flex items-center gap-2">
-                            <Ruler size={16} /> Body Measurements (cm)
+                            <Ruler size={16} /> Body Measurements (inches)
                         </h3>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Chest</label>
-                                <input type="number" name="chest" value={formData.chest} onChange={handleInputChange} className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="cm" />
+                                <input type="number" name="chest" value={formData.chest} onChange={handleInputChange} className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="inches" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Waist</label>
-                                <input type="number" name="waist" value={formData.waist} onChange={handleInputChange} className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="cm" />
+                                <input type="number" name="waist" value={formData.waist} onChange={handleInputChange} className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="inches" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Hips</label>
-                                <input type="number" name="hips" value={formData.hips} onChange={handleInputChange} className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="cm" />
+                                <input type="number" name="hips" value={formData.hips} onChange={handleInputChange} className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="inches" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Biceps</label>
-                                <input type="number" name="biceps" value={formData.biceps} onChange={handleInputChange} className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="cm" />
+                                <input type="number" name="biceps" value={formData.biceps} onChange={handleInputChange} className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="inches" />
                             </div>
                         </div>
                     </div>
@@ -508,7 +508,7 @@ const HealthDashboard = () => {
                 <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100">
                     <div className="mb-6">
                         <h3 className="text-lg font-bold text-gray-800 dark:text-white">Body Measurements</h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">Trends in Biceps,Waist, Chest, and Hips (cm).</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">Trends in Biceps,Waist, Chest, and Hips (inches).</p>
                     </div>
                     <div className="h-[300px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
