@@ -123,7 +123,7 @@ const RequestDataTable: React.FC<RequestDataTableProps> = ({ data }) => {
           {table.getRowModel().rows.map((row) => (
             <tr
               key={row.id}
-              className="border-b border-gray-200 hover:bg-gray-100"
+              className="border-b border-gray-200 text-gray-900 dark:text-white bg-white dark:bg-gray-800"
             >
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id} className="py-3 px-6 text-center">
