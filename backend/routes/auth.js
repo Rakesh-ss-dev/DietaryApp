@@ -39,7 +39,7 @@ router.get("/check-token", (req, res) => {
     res.status(200).json({ message: "Token valid", user });
   });
 });
-router.post("/add-user", authMiddleware, async (req, res) => {
+router.post("/add-user", async (req, res) => {
   const { email, password, mobile, name } = req.body;
   try {
     let user = await User.findOne({ email });
